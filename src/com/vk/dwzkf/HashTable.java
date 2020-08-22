@@ -75,6 +75,7 @@ public class HashTable<V> {
     }
 
     private int hashCode(String key) {
+        if (key==null) throw new NullPointerException();
         int hashCode = 0;
         for (char c : key.toCharArray()) {
             hashCode += (int) c;
@@ -83,7 +84,13 @@ public class HashTable<V> {
     }
 
     public void put(String key, V value) {
-        int hash = hashCode(key);
+        int hash = 0;
+        try {
+            hash = hashCode(key);
+        }
+        catch (NullPointerException e) {
+            return;
+        }
         hash = hash % table.length;
         if (table[hash] == null) {
             table[hash] = new Data<>(key, value);
@@ -113,7 +120,13 @@ public class HashTable<V> {
     }
 
     public V get(String key) {
-        int hash = hashCode(key);
+        int hash = 0;
+        try {
+            hash = hashCode(key);
+        }
+        catch (NullPointerException e) {
+            return null;
+        }
         hash = hash % table.length;
         Data<V> data = table[hash];
         while (data != null) {
@@ -138,7 +151,13 @@ public class HashTable<V> {
     }
 
     public void remove(String key) {
-        int hash = hashCode(key);
+        int hash = 0;
+        try {
+            hash = hashCode(key);
+        }
+        catch (NullPointerException e) {
+            return;
+        }
         hash = hash % table.length;
         Data<V> data = table[hash];
         if (data==null) return;
