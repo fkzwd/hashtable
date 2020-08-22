@@ -141,6 +141,8 @@ public class HashTable<V> {
         int hash = hashCode(key);
         hash = hash % table.length;
         Data<V> data = table[hash];
+        if (data==null) return;
+
         if (data.getKey().equals(key)) {
             table[hash] = data.getNext();
             elements--;
