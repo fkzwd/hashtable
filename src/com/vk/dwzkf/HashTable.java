@@ -152,6 +152,7 @@ public class HashTable<V> {
                     elements--;
                     break;
                 }
+                data = data.getNext();
             }
         }
     }
